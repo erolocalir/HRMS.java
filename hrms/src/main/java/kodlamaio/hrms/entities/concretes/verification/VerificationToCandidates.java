@@ -1,4 +1,4 @@
-package kodlama.io.hrms.entities.concretes;
+package kodlama.io.hrms.entities.concretes.verification;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,35 +10,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
-@Table(name="Users")
+@Entity
+@Table(name="Verifications")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users {
+
+public class VerificationToCandidates {
 	
 	@Id
 	@GeneratedValue
-    @Column(name="id")
+	
+	@Column(name="id")
 	private int id;
-	
-	
-	@Column(name="password")
-	private String password;
-	
-	
-	@Column(name="email")
-	private String email;
-	
-	@Column(name="emailVerified",nullable=false)
-	private boolean emailVerified;
-
 	
 
 }
-
-
-
-
-
-

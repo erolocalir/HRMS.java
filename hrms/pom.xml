@@ -5,10 +5,10 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.5</version>
+		<version>2.5.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>kodlamaio</groupId>
+	<groupId>kodlama.io</groupId>
 	<artifactId>hrms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hrms</name>
@@ -46,7 +46,23 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			</dependency>
+			<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>2.9.2</version>
 		</dependency>
+	
+	<dependency>
+	    <groupId>io.springfox</groupId>
+	    <artifactId>springfox-swagger-ui</artifactId>
+	    <version>2.9.2</version>
+</dependency>
+  <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+          <optional>true</optional>
+    </dependency>
 	</dependencies>
 
 	<build>

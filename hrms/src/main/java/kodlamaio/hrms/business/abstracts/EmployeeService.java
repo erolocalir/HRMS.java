@@ -1,11 +1,17 @@
-package kodlamaio.hrms.business.abstracts;
+package kodlama.io.hrms.business.abstracts;
 
 import java.util.List;
 
-import kodlamaio.hrms.entities.concretes.Employee;
+import kodlama.io.hrms.core.utilities.results.DataResult;
+import kodlama.io.hrms.core.utilities.results.Result;
+import kodlama.io.hrms.entities.concretes.Employee;
+import kodlama.io.hrms.entities.concretes.verification.EmployerVerificationByEmployees;
 
 public interface EmployeeService {
-
-	List<Employee> getAll();
 	
+	 List<Employee> getAll();
+	
+	 
+
 }
+

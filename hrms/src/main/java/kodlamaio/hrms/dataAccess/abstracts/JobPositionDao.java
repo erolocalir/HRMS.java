@@ -1,10 +1,17 @@
-package kodlamaio.hrms.dataAccess.abstracts;
+package kodlama.io.hrms.dataAccess.abstracts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import kodlamaio.hrms.entities.concretes.JobPosition;
-
+import kodlama.io.hrms.entities.concretes.JobPosition;
 
 public interface JobPositionDao extends JpaRepository<JobPosition, Integer> {
+	
+	
+	JobPosition getPositionName(String positionName);
+
+	JobPosition findByPositonName(String positionName);
+	
 
 }
+
+

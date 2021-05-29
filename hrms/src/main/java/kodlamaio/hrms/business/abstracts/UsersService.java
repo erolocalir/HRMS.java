@@ -1,12 +1,21 @@
-package kodlamaio.hrms.business.abstracts;
+package kodlama.io.hrms.business.abstracts;
 
 import java.util.List;
 
-import kodlamaio.hrms.entities.concretes.Users;
+import kodlama.io.hrms.core.utilities.results.DataResult;
+import kodlama.io.hrms.core.utilities.results.Result;
+import kodlama.io.hrms.entities.concretes.Users;
+
 
 public interface UsersService {
-	
-	List<Users> getAll();
-	
 
+	DataResult<List<Users>> getAll();
+
+	Result verifyUser(String email, String activationCode);
+
+	DataResult<Users> getByEmail(String email);
+	
+	Result add(Users users);
+	
 }
+

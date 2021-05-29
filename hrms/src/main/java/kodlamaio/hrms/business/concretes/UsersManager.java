@@ -1,33 +1,90 @@
-package kodlamaio.hrms.business.concretes;
+package kodlama.io.hrms.business.concretes;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import kodlamaio.hrms.business.abstracts.UsersService;
-import kodlamaio.hrms.dataAccess.abstracts.UsersDao;
-import kodlamaio.hrms.entities.concretes.Users;
+import kodlama.io.hrms.business.abstracts.UsersService;
+import kodlama.io.hrms.core.utilities.results.DataResult;
+import kodlama.io.hrms.core.utilities.results.ErrorResult;
+import kodlama.io.hrms.core.utilities.results.Result;
+import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
+import kodlama.io.hrms.core.utilities.results.SuccessResult;
+import kodlama.io.hrms.core.utilities.validation.EmailService;
+import kodlama.io.hrms.dataAccess.abstracts.UsersDao;
+import kodlama.io.hrms.entities.concretes.Users;
 
-@Service
 public class UsersManager implements UsersService {
 	
+   private UsersDao usersDao;
+   private EmailService emailService;
 	
-	private UsersDao usersDao;
-	
+
     @Autowired
-	public UsersManager(UsersDao usersDao) {
-		super();
-		this.usersDao = usersDao;
+    public UsersManager(UsersDao usersDao, EmailService emailService) {
+	super();
+	this.usersDao = usersDao;
+	this.emailService = emailService;
+	
+}
+
+
+    
+	@Override
+	public DataResult<List<Users>> getAll() {
+		
+		return new SuccessDataResult<List<Users>>( usersDao.findAll() );
 	}
+
+
 
 
 	@Override
-	public List<Users> getAll() {
+	public DataResult<Users> getByEmail(String email) {
+		return new SuccessDataResult<Users>(usersDao.findByEmail(email));
+	
+	}
+
+
+	
+	@Override
+	public Result add(Users users) {
 		
-		return this.usersDao.findAll();
+		
+			this.usersDao.save(users);
+			this.emailService.send(users.getEmail(), 
+					"Doğrulama Linki", 
+					"HRMS Sistemine hoşgeldiniz. "
+					+ "Aşağıdaki linke tıklayarak üyeliğinizi doğrulayın. "
+					+ "www.localhost:8080/api/users/verify?email=" + users.getEmail() + "&verifycode=" + users.isEmailVerified());
+			        return new SuccessResult();
+		}
+	
+	
+	
+	
+	
+	
+
+	@Override
+	public Result verifyUser(String email, String activationCode) {
+		
+		Users users = usersDao.findByEmailAndEmailVerifyCode(email,activationCode);
+		if(users == null)
+			return new ErrorResult("Doğrulama başarısız lütfen bilgileri doğru girdiğinizden emin olun.");
+		
+		users.setEmailVerified(true);
+		usersDao.save(users);
+		return new SuccessResult("Kullanıcı e-postası başarıyla doğrulandı.");
+	}
+		
+		
+	
+	
+
+
 	}
 	
 	
 
-}
+

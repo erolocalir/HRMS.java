@@ -1,16 +1,19 @@
-package kodlamaio.hrms.entities.concretes;
+package kodlama.io.hrms.entities.concretes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Table(name="Candidates")
-
+@AllArgsConstructor
+@NoArgsConstructor
 public class Candidates {
 	
 	@Id
@@ -29,9 +32,8 @@ public class Candidates {
 	@Column(name="date_of_birth")
 	private String dateOfBirth;
 	
-	@Column(name="email")
-	private String email;
-	
 	
 
 }
+
+

@@ -1,17 +1,21 @@
-package kodlamaio.hrms.api.controllers;
+package kodlama.io.hrms.api.controllers;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.hrms.business.abstracts.JobPositionService;
-import kodlamaio.hrms.entities.concretes.JobPosition;
+import kodlama.io.hrms.business.abstracts.JobPositionService;
+import kodlama.io.hrms.core.utilities.results.Result;
+import kodlama.io.hrms.entities.concretes.JobPosition;
 
 @RestController
-@RequestMapping("/api/jobpositions")
+@RequestMapping("/api/Jobpositions")
+
 public class JobPositionsControllers {
 	
 	private JobPositionService jobPositionService;
@@ -28,5 +32,22 @@ public class JobPositionsControllers {
 		return this.jobPositionService.getAll();
 		
 	}
+	
+	
+	
+	@GetMapping("/getbyname")
+	public JobPosition getByPositionName(String positionName){
+		return this.jobPositionService.getByPositionName(positionName);
+	}
+	
+	
+	
+	@PostMapping("add")
+	public Result addNew(@RequestBody JobPosition jobPosition) {
+		return this.jobPositionService.addNewPosition(jobPosition);
+	}
 
+	
 }
+
+
