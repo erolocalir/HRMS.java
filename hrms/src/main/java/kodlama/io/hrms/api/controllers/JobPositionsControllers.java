@@ -13,6 +13,7 @@ import kodlama.io.hrms.business.abstracts.JobPositionService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.entities.concretes.JobPosition;
+import kodlama.io.hrms.entities.dtos.JobPositionWithAdvertisementDto;
 
 @RestController
 @RequestMapping("/api/Jobpositions")
@@ -45,14 +46,22 @@ public class JobPositionsControllers {
 	@GetMapping("/getbyid")
 	public DataResult<JobPosition> getById(int id){
 		return this.jobPositionService.getById(id);
-		
-			
+				
 		
 	}
 	
 	@PostMapping("add")
 	public Result addNew(@RequestBody JobPosition jobPosition) {
 		return this.jobPositionService.addNewPosition(jobPosition);
+	}
+	
+	
+	@GetMapping("/getJobPositionWithAdvertisementDetails")	
+	public DataResult<List<JobPositionWithAdvertisementDto>> getJobPositionWithAdvertisementDetails(){
+		return this.jobPositionService.getJobPositionWithAdvertisementDetails();
+		
+		
+		
 	}
 
 	

@@ -8,14 +8,16 @@ import org.springframework.stereotype.Service;
 
 import kodlama.io.hrms.business.abstracts.CandidatesService;
 import kodlama.io.hrms.business.abstracts.UsersService;
-import kodlama.io.hrms.core.utilities.MernisValidationService;
 import kodlama.io.hrms.core.utilities.results.DataResult;
 import kodlama.io.hrms.core.utilities.results.ErrorResult;
 import kodlama.io.hrms.core.utilities.results.Result;
 import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
+import kodlama.io.hrms.core.utilities.results.WarningResult;
+import kodlama.io.hrms.core.utilities.validation.MernisValidationService;
 import kodlama.io.hrms.dataAccess.abstracts.CandidatesDao;
 import kodlama.io.hrms.entities.concretes.Candidates;
+import kodlama.io.hrms.entities.concretes.JobPosition;
 import kodlama.io.hrms.entities.concretes.Users;
 import kodlama.io.hrms.entities.concretes.verification.VerificationToCandidates;
 
@@ -26,6 +28,7 @@ public class CandidatesManager implements CandidatesService {
 private CandidatesDao candidatesDao;
 private UsersService usersService;
 private MernisValidationService mernisValidationService;
+private Candidates getByKnowLanguage;
 	
     @Autowired
 	public CandidatesManager(CandidatesDao candidatesDao, UsersService usersService,MernisValidationService mernisValidationService) {
@@ -65,15 +68,7 @@ private MernisValidationService mernisValidationService;
 			
 			usersService.add(verifications);
 			
-			Candidates verificationToCandidates  = new Candidates(verifications.getId(), 
-					
-					employee.getFirstName(),
-					
-					employee.getLastName(), 
-					
-					employee.getIdentityNumber(),
-					
-					employee.getDateOfBirth(), verifications);
+			Candidates verificationToCandidates  = new Candidates();
 			
 			this.candidatesDao.saveAll(verifications);
 			
@@ -151,13 +146,82 @@ private MernisValidationService mernisValidationService;
 			
 					return new ErrorResult("Tüm alanları doldurulmalı.");
 		
-				return null;
+				    return null;
 		
 	}
+
+	@Override
+	public Result addSocialMediaAccount(Candidates candidates) {
+		
+		
+		
+		String githublink = candidates.getGithubLink();
+		
+		String linkedinlink = candidates.getLinkedInLink();
+		
+		String[]  githublinkSplit = candidates.split(".com");
+		
+		String[]  linkedinlinkSplit = candidates.split(".com");
+		
+		if(!githublinkSplit[1].equals(candidates.getGithubLink())) return new ErrorResult("Linki doğru formatta girmediniz");
+		
+		if(!linkedinlinkSplit[2].equals(candidates.getLinkedInLink())) return new ErrorResult("Linki doğru formatta girmediniz");
+	
+		return null;
+	
+	
+		
+		
+		
+			
+		
+	}
+
+	@Override
+	public Result addAbility(Candidates candidates) {
+		
+	
+	if(candidates.getKnownLanguage()  == null || candidates.getKnownLanguage() == "") 
+			
+	   return new WarningResult(" Yetenek girmeniz iş verenlerin dikkatini çekebilir.");
+	
+	   this.candidatesDao.save(candidatesDao);
+		
+	   return new SuccessResult("");
+	   
+	  
+	   
+	}
+		
+	
+	
+	
+	@Override
+	public Result addGraduatedSchool(Candidates candidates) {
+		
+		
+		return null;
+		
+		
+		
+	}
+
+	
+	@Override
+	public Result addJobExperience(Candidates candidates) {
+	
+		
+		return null;
+		
+		
+	}
+
+	
 
 
 	
 }
+
 
 
 

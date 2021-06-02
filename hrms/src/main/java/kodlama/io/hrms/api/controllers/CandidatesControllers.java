@@ -39,8 +39,38 @@ public class CandidatesControllers {
 		return this.candidatesService.validation(employee);
 		
 	}
+	
+	@PostMapping("/socialmediaaccount")
+	public Result add(@RequestBody Candidates candidates) {
+		return this.candidatesService.addSocialMediaAccount(candidates);
+				
+	}
+	
+	@PostMapping("/ability")
+	public Result add1(@RequestBody Candidates candidates) {
+		return this.candidatesService.addAbility(candidates);
+		
+	
+}
+	
+	@PostMapping("/school")
+	public Result add2(@RequestBody Candidates candidates) {
+	return this.candidatesService.addGraduatedSchool(candidates);
+	
+	
+}
+	@PostMapping("/experience")
+	public Result add3(@RequestBody Candidates candidates) {
+	return this.candidatesService.addJobExperience(candidates);
+	
+	
+}
+	
 
 }
+
+
+
 
 
 

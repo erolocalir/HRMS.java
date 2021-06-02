@@ -10,6 +10,11 @@ public interface CandidatesDao extends JpaRepository<Candidates, Integer>{
 	Candidates findByNationalityId(String id);
 
 	void saveAll(Users verifications);
+
+	void save(CandidatesDao candidatesDao);
+	
+	
 	
 }
+
 

@@ -14,6 +14,7 @@ import kodlama.io.hrms.core.utilities.results.SuccessDataResult;
 import kodlama.io.hrms.core.utilities.results.SuccessResult;
 import kodlama.io.hrms.dataAccess.abstracts.JobPositionDao;
 import kodlama.io.hrms.entities.concretes.JobPosition;
+import kodlama.io.hrms.entities.dtos.JobPositionWithAdvertisementDto;
 
 @Service
 public class JobPositionManager implements JobPositionService {
@@ -62,6 +63,7 @@ private JobPositionDao jobPositionDao;
 	}
 
 
+	
 
 
 	@Override
@@ -83,6 +85,28 @@ private JobPositionDao jobPositionDao;
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	@Override
+	public DataResult<List<JobPositionWithAdvertisementDto>> getJobPositionWithAdvertisementDetails() {
+		
+		return new SuccessDataResult<List<JobPositionWithAdvertisementDto>>
+		
+		(this.jobPositionDao.getJobPositionWithAdvertisementDetails(),"Detaylar getirildi");
+		
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
 
 
